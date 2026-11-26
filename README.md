@@ -1,5 +1,7 @@
 # Instagram post alerts 
-
+ 
+ [![Instagram post alerts](https://github.com/Infrasity-Labs/instagram-post-alerts/actions/workflows/checks.yml/badge.svg)](https://github.com/Infrasity-Labs/instagram-post-alerts/actions/workflows/checks.yml)
+ 
 Sends a Slack message whenever a tracked Instagram profile posts something new.
 
 - Checks every 30 minutes on GitHub Actions (free).
