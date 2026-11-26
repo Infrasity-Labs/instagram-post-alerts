@@ -1,0 +1,45 @@
+name: Instagram post alerts
+
+on:
+  schedule:
+    # Every 30 minutes. Change to "0 * * * *" for hourly.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Send a sample alert to Slack (does not change saved state)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-alerts
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check profiles and alert on Slack
+        env:
+          APIFY_TOKEN_1: ${{ secrets.APIFY_TOKEN_1 }}
+          APIFY_TOKEN_2: ${{ secrets.APIFY_TOKEN_2 }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEST_ALERT: ${{ inputs.test_alert }}
+        run: python3 check_instagram.py
+
+      - name: Save seen posts
+        if: always()
+        run: |
+          git config user.name "instagram-alert-bot"
+          git config user.email "instagram-alert-bot@users.noreply.github.com"
+          git add state/seen.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update seen posts"
+            git push
+          fi
