@@ -1,6 +1,17 @@
 {
-  "initialized": false,
-  "seen": {},
+  "initialized": true,
+  "seen": {
+    "thevarunmayya": [
+      "DgK7Y9XosRD",
+      "DgIQQ6KRgmg",
+      "DgFujkkRofu"
+    ],
+    "vaibhavsisinty": [
+      "DgKr8sbgmw5",
+      "DgIPLOKgxOg",
+      "DgF7RqYgPyd"
+    ]
+  },
   "down_alerted": false,
   "failover_alerted": false
 }
