@@ -1,4 +1,4 @@
-# Instagram post alerts
+# Instagram post alerts 
 
 Sends a Slack message whenever a tracked Instagram profile posts something new.
 
